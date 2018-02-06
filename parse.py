@@ -1,3 +1,14 @@
+"""
+Lightweight general-purpose parsing library, usable also for Pandoc.
+
+To quote Dr. Seuss (http://www.willamette.edu/~fruehr/haskell/seuss.html):
+
+> A Parser for Things
+> is a function from Strings
+> to Lists of Pairs
+> of Things and Strings!
+"""
+
 def string(s):
     return [(s[0]['c'], s[1:])] if s and s[0]['t'] == 'Str'   else []
 def space(s):
