@@ -1,2 +1,63 @@
-# pandocfilters
-Pandoc filters for scientific writing
+# Pandoc Filters for Scientific Writing
+
+This package contains several filters for [Pandoc](https://pandoc.org/)
+to facilitate writing scientific texts.
+
+Supported features are:
+
+* Definition lists as LaTeX environments, see [](#defenv).
+* Links as intra-document references, see [](#linkref).
+* Tables with the `tabular` environment, see [](#tables).
+
+To use the filters, you need `pandoc` and `python-pandocfilters`.
+Run `make` to generate PDF and HTML output for this example file.
+
+
+## Definition Environments {#defenv}
+
+The `defenv` filter interprets definition lists as LaTeX environments.
+The first word of the definition is the environment type.
+It can be followed by a label as well as by a name.
+An example with a name follows:
+
+Definition (Tree)
+: A *tree* is a tuple $(N, \rightarrow)$, where
+  $N$ is a set of tree nodes and
+  $\rightarrow \in N \times N$ is a cycle-free relation.
+
+Let us now reference a theorem, namely [](#thm:inftrees).
+
+Theorem thm:inftrees
+: Let $N$ be an infinite set.
+  Then there exists an infinite number of trees for $N$.
+
+Proof
+: Trivial!
+
+
+## Link References {#linkref}
+
+The `linkref` filter renders links of the shape `[](#ref)`
+as intra-document references.
+In LaTeX, this is rendered as `\autoref{ref}`, whereas
+in HTML, this is rendered as `<a href="#ref">ref</a>`.
+
+
+## Tables
+
+The `tabular` filter renders LaTeX tables using the `tabular` package
+instead of the `longtable` package used by Pandoc by default.
+Unfortunately, we still have to use `\label` to reference tables.
+For a more complete solution, you may consider using something like
+[pandoc-tablenos](https://github.com/tomduck/pandoc-tablenos).
+
+An example is shown in [](#tab:example).
+
+Table: Demonstration of pipe table syntax.
+  \label{tab:example}
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
