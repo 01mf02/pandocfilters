@@ -1,0 +1,7 @@
+div.references:before {
+  content: "References";
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+dt { font-weight: bold; }
