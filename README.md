@@ -1,4 +1,7 @@
-# Pandoc Filters for Scientific Writing
+---
+title: Pandoc Filters for Scientific Writing
+author: Michael Färber
+---
 
 This package contains several filters for [Pandoc](https://pandoc.org/)
 to facilitate writing scientific texts.
@@ -13,7 +16,7 @@ To use the filters, you need `pandoc` and `python-pandocfilters`.
 Run `make` to generate PDF and HTML output for this example file.
 
 
-## Definition Environments {#defenv}
+# Definition Environments {#defenv}
 
 The `defenv` filter interprets definition lists as LaTeX environments.
 The first word of the definition is the environment type.
@@ -35,7 +38,7 @@ Proof
 : Trivial!
 
 
-## Link References {#linkref}
+# Link References {#linkref}
 
 The `linkref` filter renders links of the shape `[](#ref)`
 as intra-document references.
@@ -43,7 +46,7 @@ In LaTeX, this is rendered as `\autoref{ref}`, whereas
 in HTML, this is rendered as `<a href="#ref">ref</a>`.
 
 
-## Tables
+# Tables
 
 The `tabular` filter renders LaTeX tables using the `tabular` package
 instead of the `longtable` package used by Pandoc by default.
