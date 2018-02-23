@@ -30,7 +30,8 @@ def tbl_headers(s, delimiter):
     result = s[0][0]['c'][:]
     for i in range(1, len(s)):
         result.append(inlatex(' & '))
-        result.extend(s[i][0]['c'])
+        if len(s[i]) > 0:
+            result.extend(s[i][0]['c'])
     result.append(inlatex(delimiter))
     return pf.Para(result)
 
@@ -39,7 +40,8 @@ def tbl_contents(s, delimiter):
     for row in s:
         para = []
         for col in row:
-            para.extend(col[0]['c'])
+            if len(col) > 0:
+                para.extend(col[0]['c'])
             para.append(inlatex(' & '))
         result.extend(para)
         result[-1] = inlatex(delimiter + '\n')
