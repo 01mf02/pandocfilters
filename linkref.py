@@ -27,7 +27,7 @@ def linkref(key, value, format, meta):
             elif format == "html" or format == "html5":
                 # If no title given, set title to reference label
                 if value[1] == []:
-                    value[1] = [Str (label)]
+                    value[1] = [Str (", ".join(labels))]
 
 if __name__ == "__main__":
     toJSONFilter(linkref)
