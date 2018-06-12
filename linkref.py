@@ -21,9 +21,9 @@ def linkref(key, value, format, meta):
         #eprint(value)
         url = value[2][0]
         if url[0] == '#':
-            label = url[1:]
+            labels = url[1:].split(";%20#")
             if format == "latex":
-                return (latex('\\autoref{' + label + '}'))
+                return (latex('\\autoref{' + ",".join(labels) + '}'))
             elif format == "html" or format == "html5":
                 # If no title given, set title to reference label
                 if value[1] == []:
