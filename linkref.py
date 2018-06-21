@@ -20,7 +20,7 @@ def linkref(key, value, format, meta):
     if key == 'Link':
         #eprint(value)
         url = value[2][0]
-        if url[0] == '#':
+        if len(url) > 1 and url[0] == '#':
             labels = url[1:].split(";%20#")
             if format == "latex":
                 return (latex('\\autoref{' + ",".join(labels) + '}'))
