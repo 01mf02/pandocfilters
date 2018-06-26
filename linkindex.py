@@ -23,16 +23,11 @@ def linkindex(key, value, format, meta):
         url = value[2][0]
         title = value[2][1]
 
-        if title:
-            index = [Str(title)]
-        elif url == '#':
-            index = name
-        else:
-            index = []
+        index = title if title else stringify(name) if url == '#' else []
 
         if index:
             if format == "latex":
-                return name + [latex('\index{')] + index + [latex('}')]
+                return name + [latex('\index{' + index + '}')]
 
 if __name__ == "__main__":
     toJSONFilter(linkindex)
