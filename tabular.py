@@ -47,7 +47,7 @@ def tbl_contents(s, delimiter):
         result[-1] = inlatex(delimiter + '\n')
     return pf.Para(result)
 
-def do_filter(k, v, f, m):
+def tabular(k, v, f, m):
     if k == "Table":
         has_caption = (len(v[0]   ) > 0)
         has_header  = (len(v[3][0]) > 0)
@@ -64,4 +64,4 @@ def do_filter(k, v, f, m):
             + ([ latex(r'\end{table}')] if has_caption else [])
 
 if __name__ == "__main__":
-    pf.toJSONFilter(do_filter)
+    pf.toJSONFilter(tabular)
