@@ -7,6 +7,16 @@ import sys
 
 from pandocfilters import walk
 
+def get_value(kv, key, value = None):
+    """get value from the keyvalues (options)"""
+    res = []
+    for k, v in kv:
+        if k == key:
+            value = v
+        else:
+            res.append([k, v])
+    return value, res
+
 def toJSONFilters(actions):
     """Generate a JSON-to-JSON filter from stdin to stdout
     The filter:

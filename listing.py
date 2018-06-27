@@ -15,19 +15,10 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 from pandocfilters import toJSONFilter, RawInline, Plain, CodeBlock
+from pfcompat import get_value
 
 def latex(x):
     return RawInline('latex', x)
-
-def get_value(kv, key, value = None):
-    """get value from the keyvalues (options)"""
-    res = []
-    for k, v in kv:
-        if k == key:
-            value = v
-        else:
-            res.append([k, v])
-    return value, res
 
 def listing(key, value, format, meta):
     #eprint("Key: " + key)
