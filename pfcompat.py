@@ -5,7 +5,7 @@ import io
 import json
 import sys
 
-from pandocfilters import walk
+from pandocfilters import walk, elt
 
 def get_value(kv, key, value = None):
     """get value from the keyvalues (options)"""
@@ -72,3 +72,7 @@ def applyJSONFilters(actions, source, format=""):
         altered = walk(altered, action, format, meta)
 
     return json.dumps(altered)
+
+# the version of pandocfilters defines Image to have only two arguments,
+# whereas Pandoc gives it three
+Image = elt('Image', 3)

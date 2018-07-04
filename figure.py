@@ -7,7 +7,7 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 from pandocfilters import toJSONFilter, RawInline
-from pfcompat import get_value
+from pfcompat import get_value, Image
 
 def latex(x):
     return RawInline('latex', x)
@@ -17,33 +17,21 @@ def figure(key, value, format, meta):
     if key == 'Image':
         ident = value[0][0]
         classes = value[0][1]
-        kvs = value[0][2]
         caption = value[1]
-        filename = value[2][0]
-        
-        if filename.endswith('.tex'):
-            cmd = r'\input{' + filename + '}'
+        image = Image(value[0], value[1], value[2])
 
-            width = get_value(kvs, 'width')[0]
-            if width:
-                fwidth = float(width.rstrip('%'))
-                swidth = repr(fwidth / 100)
-                cmd = r'\resizebox{' + swidth + r'\textwidth}{!}{' + cmd + '}'
-
-            if 'tikzexternal' in classes:
-                cmd = r'\tikzexternalenable' + cmd + r'\tikzexternaldisable'
-
-        else:
-            cmd = r'\includegraphics{' + filename + '}'
+        external = 'tikzexternal' in classes
 
         return \
-            [latex(r'\begin{figure}' + '\n' + \
-                   cmd + '\n' + \
-                   r'\caption{')] + \
-            caption + \
-            [latex('}' + '\n' + \
-                   r'\label{' + ident + '}' + '\n' + \
-                   r'\end{figure}')]
+            [ latex(r'\begin{figure}' + '\n') \
+            , latex(r'\tikzexternalenable' + '\n' if external else '') \
+            , image, latex('\n') \
+            , latex(r'\tikzexternaldisable' + '\n' if external else '') \
+            , latex(r'\caption{') \
+            ] + caption + \
+            [ latex('}' + '\n'), \
+            , latex(r'\label{' + ident + '}' + '\n') \
+            , latex(r'\end{figure}')]
 
 if __name__ == "__main__":
     toJSONFilter(figure)
