@@ -29,9 +29,10 @@ def figure(key, value, format, meta):
             , latex(r'\tikzexternaldisable' + '\n' if external else '') \
             , latex(r'\caption{') \
             ] + caption + \
-            [ latex('}' + '\n'), \
+            [ latex('}' + '\n') \
             , latex(r'\label{' + ident + '}' + '\n') \
-            , latex(r'\end{figure}')]
+            , latex(r'\end{figure}') \
+	    ]
 
 if __name__ == "__main__":
     toJSONFilter(figure)
