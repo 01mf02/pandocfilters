@@ -11,6 +11,7 @@ Supported features are:
 * Definition lists as LaTeX environments, see [](#defenv).
 * Links as intra-document references, see [](#linkref).
 * Tables with the `tabular` environment, see [](#tables).
+* Floating code blocks with captions, see [](#listing).
 
 To use the filters, you need `pandoc` and `python-pandocfilters`.
 Run `make` to generate PDF and HTML output for this example file.
@@ -64,3 +65,29 @@ Table: Demonstration of pipe table syntax.
 |   12  |  12  |    12   |    12  |
 |  123  |  123 |   123   |   123  |
 |    1  |    1 |     1   |     1  |
+
+
+# Code Blocks {#listing}
+
+The `listing` filter renders Pandoc code blocks as
+floating code blocks with a caption.
+By default, Pandoc creates floating code blocks
+only when using the `--listings` option.
+However, I find the output of the `listings` package
+not as aesthetically pleasing as the one from Pandoc.
+This filter thus allows to obtain
+the beautiful output from Pandoc within a floating code block.
+An example is given in [](#hello-world).
+
+~~~ {#hello-world .c caption="Hello World in C."}
+#include <stdio.h>
+
+int main()
+{
+    printf("Hello World!\n");
+    return 0;
+}
+~~~
+
+Notice that this filter requires some LaTeX code to create the `listing` environment.
+It can be found in `header.tex`.

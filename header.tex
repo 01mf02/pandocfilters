@@ -11,3 +11,10 @@
 \makeatletter
 \g@addto@macro\@floatboxreset\centering
 \makeatother
+
+% declare listing environment
+\usepackage{newfloat}
+\DeclareFloatingEnvironment{listing}
+% reduce space between listing caption and actual listing, taken from:
+% https://stackoverflow.com/questions/2318598/how-to-reduce-the-seperation-from-other-text-using-latex-minted
+\setlength\partopsep{-\topsep}
