@@ -24,6 +24,9 @@ def listing(key, value, format, meta):
     #eprint("Key: " + key)
     if key == 'CodeBlock':
         (caption, _) = get_value(value[0][2], 'caption')
+
+        if caption is None:
+            return
         
         block = CodeBlock(value[0], value[1])
 
