@@ -21,9 +21,11 @@ def figure(key, value, format, meta):
         image = Image(value[0], value[1], value[2])
 
         external = 'tikzexternal' in classes
+        span     = 'span'         in classes
+        env = 'figure*' if span else 'figure'
 
         return \
-            [ latex(r'\begin{figure}' + '\n') \
+            [ latex(r'\begin{' + env + '}\n') \
             , latex(r'\tikzexternalenable' + '\n' if external else '') \
             , image, latex('\n') \
             , latex(r'\tikzexternaldisable' + '\n' if external else '') \
@@ -31,7 +33,7 @@ def figure(key, value, format, meta):
             ] + caption + \
             [ latex('}' + '\n') \
             , latex(r'\label{' + ident + '}' + '\n') \
-            , latex(r'\end{figure}') \
+            , latex(r'\end{' + env + '}') \
 	    ]
 
 if __name__ == "__main__":
